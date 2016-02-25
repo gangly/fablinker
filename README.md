@@ -3,6 +3,7 @@
 fablinker是一个多服务器项目部署和管理的工具。基于python 2.7 ，用到fabric第三方库，在一台服务器上可管理控制多个远程主机，目前V0.01已开发完成。
 
 2.应用场景
+
 2.1 项目部署
 比如分布式爬虫部署在12台机器上，一旦代码更改，那么所有worker上的代码都要更新。
 当然你可以写一个shell脚本，用12个scp命令从master上将代码拷贝到worker上，但是相对麻烦一点。
@@ -13,15 +14,17 @@ fablinker是一个多服务器项目部署和管理的工具。基于python 2.7 
 用fablinker工具只需一个get命令搞定。
 
 2.2 运维
+
 比如公司给咱蜂鸟分配了50台服务器，现在需要个每台服务器安装些软件，配置些环境。可以写个shell脚本，然后用scp将脚本分发到各个服务器上，
 依次登录各个服务器，执行该shell脚本。
 用fablinker可以在所有服务器上执行命令，当然也支持批处理和root权限（正在开发中，v0.02完成）。
 
 3.fablinker有哪些功能
-put : 从本地主机上分发文件至所有远程主机
-get : 从远程主机上收集文件至本地主机
-fab shellcmd : 在所有远程主机上执行shellcmd命令， 比如 ls ， php  test.php， kill 
-fab vim test.txt : 依次打开所有远程主机上的test.txt文件，可写入，更改， 保存。
-!cmd   可以在本地执行命令
+
+* put : 从本地主机上分发文件至所有远程主机
+* get : 从远程主机上收集文件至本地主机
+* fab shellcmd : 在所有远程主机上执行shellcmd命令， 比如 ls ， php  test.php， kill 
+* fab vim test.txt : 依次打开所有远程主机上的test.txt文件，可写入，更改， 保存。
+* !cmd   可以在本地执行命令
 
 更多信息：请查看wiki
