@@ -28,4 +28,4 @@ fablinker是一个多服务器项目部署和管理的工具。基于python 2.7 
 * fab vim test.txt : 依次打开所有远程主机上的test.txt文件，可写入，更改， 保存。
 * !cmd   可以在本地执行命令
 
-更多信息：请查看wiki
+更多信息请查看wiki:http://blog.csdn.net/freefishly/article/details/50748483
