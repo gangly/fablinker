@@ -25,6 +25,7 @@ fablinker是一个多服务器项目部署和管理的工具。基于python 2.7 
 
 * put : 从本地主机上分发文件至所有远程主机
 * get : 从远程主机上收集文件至本地主机
+* at: 切换到某个单机，或者切换到某个机器组
 * fab shellcmd : 在所有远程主机上执行shellcmd命令， 比如 ls ， php  test.php， kill 
 * fab vim test.txt : 依次打开所有远程主机上的test.txt文件，可写入，更改， 保存。
 * !cmd   可以在本地执行命令
