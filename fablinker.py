@@ -17,7 +17,7 @@ def welcome():
     wel =   '''
             **************************************************************
             Welcome to fablinker V0.01.
-            Please send email to ligang05@baidu.com if any problem hapend.
+            Please send email to gangly123@163.com if any problem hapend.
             Type help for more information.
             Enjoy your operations! (*^_^*)
             **************************************************************
