@@ -28,12 +28,12 @@ def get_cmd_args():
     parser = argparse.ArgumentParser(description='Fablinker is a tool for operating servers!')
 
     parser.add_argument('-f', action='store', dest='conf_file', help='server hosts file, each line descript a server')
-    parser.add_argument('--version', action='show_version', help='show the version of fablinker')
+    parser.add_argument("-v", "--version", help="show the version of fablinker", action="store_true")
     cmd_args = parser.parse_args()
 
-    # if cmd_args.version:
-    #     print(__version__)
-    #     exit(0)
+    if cmd_args.version:
+        print(__version__)
+        exit(0)
     conf_file = cmd_args.conf_file if cmd_args.conf_file else CONFIG_FILE
     if not os.path.isfile(conf_file):
         raise FileNotFoundError("config file not found!")
