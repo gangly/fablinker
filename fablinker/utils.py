@@ -4,7 +4,7 @@ import argparse
 
 from fabric.colors import *
 
-from fablinker.compat import config_parser
+from fablinker.compat import config_parser, compat_input
 # from fablinker.constant import CONFIG_FILE
 from fablinker.constant import CONFIG_FILE, __version__
 from fablinker.exceptions import ConfigParseError, FileNotFoundError
@@ -69,4 +69,13 @@ def get_full_path(path):
     fullpath = os.path.expanduser(fullpath)
     fullpath = os.path.abspath(fullpath)
     return fullpath
+
+
+def warning_prompt(prompt_text):
+
+    msg = red("%s(yes/no): " % (prompt_text,))
+    response = compat_input(msg)
+    while response not in ['yes', 'no']:
+        response = compat_input(msg)
+    return response == 'yes'
 

@@ -11,7 +11,7 @@ from fabric.colors import *
 
 from fablinker.compat import config_parser
 from fablinker.constant import CMD_PROMPT
-from fablinker.utils import ColorPrint, parse_config
+from fablinker.utils import ColorPrint, parse_config, warning_prompt
 
 
 def fab_execute(func):
@@ -67,8 +67,6 @@ class FabShell(cmd.Cmd):
             return True
         except Exception as e:
             ColorPrint.red(e.message)
-
-
 
     def set_fabp(self, *args):
         args_list = args[0]
@@ -154,6 +152,18 @@ class FabShell(cmd.Cmd):
             ColorPrint.red(e)
         return True
 
+    def fab_task_rm(self, args):
+        """
+        rm command
+        :param args:
+        :return:
+        """
+        isok = warning_prompt('rm is dangerous command, sure to execute ? ')
+        if isok:
+            self.fab_run(args)
+        return True
+
+
     def do_fab(self, args):
         """
         -*-*-*-*-*-*-*-*-
@@ -178,6 +188,7 @@ class FabShell(cmd.Cmd):
             if args[-1] == '&':
                 args = 'nohup ' + args + ' disown;sleep 1'
             with fab.settings(**fab_kw):
+                # 需要定制开发的命令
                 if self.callback('fab_task_', args_list[0], args):
                     return
                 self.fab_run(args)

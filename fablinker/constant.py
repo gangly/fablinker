@@ -4,7 +4,7 @@ import os
 
 # from utils import get_full_path
 
-__version__ = '1.1.9'
+__version__ = '1.1.10'
 
 CONF_FILE_NAME = 'fabconf.ini'
 
