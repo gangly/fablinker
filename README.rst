@@ -1,8 +1,12 @@
 # fablinker
 ## 1.fablinker是什么
 fablinker是一个多服务器项目部署和管理的工具。
-基于python 2.7，用到fabric第三方库，在一台服务器上可管理控制多个远程主机，目前V0.01已开发完成。
-首先需要确保所用的机器能用ssh连接。
+
+兼容python2.7、python3+，用到fabric第三方库，在一台服务器上可管理控制多个远程主机。
+
+目前V0.01已开发完成。
+
+使用前首先需要确保所用的机器能用ssh连接。
 
 ![原理图](img/fab.png)
 
@@ -11,10 +15,13 @@ fablinker是一个多服务器项目部署和管理的工具。
 ### 2.1 项目部署
 
 比如分布式项目部署在12台机器上，一旦代码更改，那么所有worker上的代码都要更新。
+
 当然你可以写一个shell脚本，用12个scp命令从master上将代码拷贝到worker上，但是相对麻烦一点。
 用fablinker工具只需一个put命令搞定。
+
 然后我还需要kill掉所有worker进程，重新启动程序。没办法，这样你就只有一个个登录worker服务器，用kill，sh  **.py命令依次执行。
 用fablinker工具只需kill 和 sh **.py两条命令搞定。
+
 如果我还要将各个woker上生成的数据 data.dat收集起来，同样你可以写shell脚本用12个scp命令。
 用fablinker工具只需一个get命令搞定。
 
