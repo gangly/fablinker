@@ -27,7 +27,7 @@ class ColorPrint(object):
 def get_cmd_args():
     parser = argparse.ArgumentParser(description='Fablinker is a tool for operating servers!')
 
-    parser.add_argument('-f', action='store', dest='conf_file', help='server hosts file, each line descript a server')
+    parser.add_argument('-f', action='store', dest='conf_file', help='server hosts file')
     parser.add_argument("-v", "--version", help="show the version of fablinker", action="store_true")
     cmd_args = parser.parse_args()
 
@@ -78,4 +78,6 @@ def warning_prompt(prompt_text):
     while response not in ['yes', 'no']:
         response = compat_input(msg)
     return response == 'yes'
+
+
 

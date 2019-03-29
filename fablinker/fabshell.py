@@ -21,6 +21,14 @@ def fab_execute(func):
     return wrapper
 
 
+def need_confirm(func):
+    @functools.wraps(func)
+    def wrapper(*args):
+        isok = warning_prompt('this is a dangerous command, sure to execute ? ')
+        return fab.execute(func, *args) if isok else True
+    return wrapper
+
+
 class FabShell(cmd.Cmd):
     """
     A simple fabric shell
@@ -152,15 +160,14 @@ class FabShell(cmd.Cmd):
             ColorPrint.red(e)
         return True
 
+    @need_confirm
     def fab_task_rm(self, args):
         """
         rm command
         :param args:
         :return:
         """
-        isok = warning_prompt('rm is dangerous command, sure to execute ? ')
-        if isok:
-            self.fab_run(args)
+        self.fab_run(args)
         return True
 
 
@@ -390,3 +397,11 @@ class FabShell(cmd.Cmd):
         if self.conf_changed:
             self.save_config(self.conf_file)
         return True
+
+    def emptyline(self):
+        """
+        when input nothing cmd module will execute last command.
+        redefine emptyline function
+        :return:
+        """
+        pass
