@@ -1,20 +1,23 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-from fablinker.exceptions import ConfigParseError, FileNotFoundError
+
+
+from fablinker.exceptions import ConfigParseError
 from fablinker.fabshell import FabShell
-from fablinker.utils import ColorPrint, get_cmd_args, parse_config
+from fablinker.utils import ColorPrint, get_cmd_args
+from fablinker.constant import __version__
 import traceback
 
 
 def print_welcome():
     wel = '''
             **************************************************************
-            Welcome to fablinker V0.02.
-            Please send email to gangly123@163.com if any problem hapend.
+            Welcome to fablinker V%s
+            Please send email to gangly123@163.com if any problem happened.
             Type help for more information.
             Enjoy your operations! (*^_^*)
             **************************************************************
-            '''
+            ''' % __version__
     ColorPrint.blue(wel)
 
 

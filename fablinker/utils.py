@@ -3,9 +3,7 @@
 import argparse
 
 from fabric.colors import *
-
 from fablinker.compat import config_parser, compat_input
-# from fablinker.constant import CONFIG_FILE
 from fablinker.constant import CONFIG_FILE, __version__
 from fablinker.exceptions import ConfigParseError, FileNotFoundError
 

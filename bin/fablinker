@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 import sys
 
-from fablinker.cli import main
+from fablinker import main
 
 if __name__ == "__main__":
     sys.exit(main())
