@@ -367,17 +367,20 @@ class FabShell(cmd.Cmd):
         usage: at group_name/host_name
         """
         args = args.strip()
+        switch = False
         for group, hosts in self.host_groups.items():
             if args == group:
                 fab.env.hosts = hosts
                 self.set_cmd_prompt(args)
+                switch = True
                 break
             if args in hosts:
                 fab.env.hosts = [args, ]
                 self.set_cmd_prompt(args)
+                switch = True
                 break
-        
-        ColorPrint.red('Error : can not find any group or host')
+        if not switch:
+            ColorPrint.red('Error : can not find any group or host')
 
     def do_pwd(self, args):
         """

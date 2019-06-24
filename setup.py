@@ -29,6 +29,7 @@ requires = [
             'six',
             'fabric==1.14.0',
             'setuptools',
+            'cryptography==2.4.2'
 ]
 if sys.platform == 'win32':
     requires.append('pywin32')
