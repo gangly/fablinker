@@ -52,6 +52,7 @@ fablinker是一个多服务器项目部署和管理的工具。
 python setup.py install
 
 会在当前用户的home目录下创建一个.fablinker目录，并在目录里创建默认配置文件fabconf.ini
+~/.fablinker/fabconf.ini
 
 2.pip安装
 
@@ -60,12 +61,14 @@ pip install fablinker
 
 
 ### 4.1 配置文件
-可以到.fablinker修改默认配置文件或者自己创建一个文件在运行命令时指定该配置文件
+可以到~/.fablinker修改默认配置文件或者自己创建一个文件在运行命令时指定该配置文件
+
 fablinker -f ***.ini
 
 下面是一份简单的配置文件，
 
- 
+修改配置文件~/.fablinker/fabconf.ini
+ 
 ```
 [baseconf]
 user = work
