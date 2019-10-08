@@ -1,10 +1,10 @@
 # fablinker
 ## 1.fablinker是什么
-fablinker是一个多服务器项目部署和管理的工具。
+fablinker是一个类似ansible工具，在一台服务器上可管理控制多个远程主机。
 
-兼容python2.7、python3+，用到fabric第三方库，在一台服务器上可管理控制多个远程主机。
+用python开发，兼容python2.7、python3+。
+相对ansible，fablinker基于命令行交互式操作，使用起来更加方便快捷。
 
-目前V0.01已开发完成。
 
 使用前首先需要确保所用的机器能用ssh连接。
 
