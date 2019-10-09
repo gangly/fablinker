@@ -55,6 +55,9 @@ class FabShell(cmd.Cmd):
         self.set_cmd_prompt(self.current_group)
 
     def do_save(self, *args):
+        """
+        save configure file
+        """
         self.save_config(self.conf_file)
 
     def save_config(self, conf_file):

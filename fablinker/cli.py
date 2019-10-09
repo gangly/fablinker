@@ -13,7 +13,6 @@ def print_welcome():
     wel = '''
             **************************************************************
             Welcome to fablinker V%s
-            Please send email to gangly123@163.com if any problem happened.
             Type help for more information.
             Enjoy your operations! (*^_^*)
             **************************************************************

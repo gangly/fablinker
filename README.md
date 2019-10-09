@@ -6,9 +6,13 @@ fablinker是一个类似ansible工具，在一台服务器上可管理控制多�
 相对ansible，fablinker基于命令行交互式操作，使用起来更加方便快捷。
 
 
-使用前首先需要确保所用的机器能用ssh连接。
+使用前首先需要确保所有机器能用ssh连接。
 
-![原理图](img/fab.png)
+
+
+<div align=center><img
+src="https://github.com/gangly/fablinker/blob/master/doc/img/fab.png" width="400" height="400" alt="喝杯咖啡"/>
+</div>
 
 ## 2.应用场景
 
@@ -29,7 +33,7 @@ fablinker是一个类似ansible工具，在一台服务器上可管理控制多�
 
 比如公司给分配了50台服务器，现在需要个每台服务器安装些软件，配置些环境。可以写个shell脚本，然后用scp将脚本分发到各个服务器上，
 依次登录各个服务器，执行该shell脚本。
-用fablinker可以在所有服务器上执行命令，当然也支持批处理和root权限（正在开发中，v0.02完成）。
+用fablinker可以在所有服务器上执行命令，当然也支持批处理和root权限
 
 ## 3.fablinker有哪些功能
 
@@ -37,7 +41,7 @@ fablinker是一个类似ansible工具，在一台服务器上可管理控制多�
 * get : 从远程主机上收集文件至本地主机，将远程主机文件都搜集到本机并将文件名带上主机名，-n参数，将远程文件名加上数字
 * at: 切换到某个单机，或者切换到某个机器组
 * addgrp: 动态机器分组
-* fab shellcmd : 在所有远程主机上执行shellcmd命令， 比如 ls ， php  test.php， kill 
+* fab shellcmd : 在所有远程主机上执行shellcmd命令， 比如 ls, php test.php, kill, ps等
 * fab vim test.txt : 依次打开所有远程主机上的test.txt文件，可写入，更改， 保存。
 * !cmd   可以在本地执行命令
 
@@ -45,25 +49,34 @@ fablinker是一个类似ansible工具，在一台服务器上可管理控制多�
 
 ### 安装
 
-1.下载源码安装
+方法1.下载源码安装
 
 下载源码压缩包，解压后在目录中运行：
 
 python setup.py install
 
-会在当前用户的home目录下创建一个.fablinker目录，并在目录里创建默认配置文件fabconf.ini
-~/.fablinker/fabconf.ini
 
-2.pip安装
+方法2.pip安装
 
 pip install fablinker
 
 
+上面两种方法都会在当前用户的home目录下创建一个.fablinker目录，并在目录里创建默认配置文件fabconf.ini
 
-### 4.1 配置文件
-可以到~/.fablinker修改默认配置文件或者自己创建一个文件在运行命令时指定该配置文件
+具体路径为~/.fablinker/fabconf.ini
 
-fablinker -f ***.ini
+
+
+### 4.1 修改配置文件
+
+可以到~/.fablinker修改默认配置文件fabconf.ini。
+直接在命令行执行fablinker，将使用默认配置文件
+
+如果需要使用其他配置文件，可以自己创建一个文件，并在运行命令时指定该配置文件路径
+
+```bash
+fablinker -f  myconf.ini
+```
 
 下面是一份简单的配置文件，
 
@@ -75,7 +88,7 @@ user = work
 password = **
 parallel = False
 [host_groups]
-Group0 = [192.168.181.132,192.168.181.133,192.168.181.134]
+Group0 = [192.168.181.132, 192.168.181.133, 192.168.181.134]
 
 spider = [192.168.181.132, 192.168.181.137, 192.168.181.134, 192.168.181.139]
 ```
@@ -86,7 +99,7 @@ baseconf选项是一些基本配置
 
 user：可用ssh登录其他机器的用户名，
 
-password ：登录密码，没有密码是为空
+password ：登录密码，没有密码为空
 
 parallel ：多个远程主机是否并行运行命令 , 当然在用fab命令的时候可以加参数动态更改并行选项。注意fab vim 命令不能并行执行，将直接导致错误！
 
@@ -103,8 +116,6 @@ host_groups配置主机分组，可将用于不同项目的主机分组管理。
 采用命令行交互式
 
 所有命令的使用方法都可以通过输入help命令来查看
-
-
 
 
 
@@ -138,17 +149,28 @@ host_groups配置主机分组，可将用于不同项目的主机分组管理。
 
  
 
-### 4.3 如何使用
+## 5. 命令详解
+
+[命令详解](https://github.com/gangly/fablinker/blob/master/doc/命令详解.md)
+
+所有的命令使用方法都可以在fablinker中使用help查看，比如：
 
 
-在终端输入fablinker命令即可：
+1）使用help可查看所有命令
 
-
-使用help可查看所有命令，help cmd，可查看cmd命令使用方法
+2) help cmd，可查看cmd命令使用方法
 
 fab date 运行试试，会有惊喜！
 
 
 
-![运行示例](img/test.png)
+![运行示例](doc/img/test.png)
 
+
+_____
+
+**请作者喝杯咖啡**
+
+<div align=left><img
+src="https://github.com/gangly/fablinker/blob/master/doc/img/微信pay.png" width="200" height="200" alt="喝杯咖啡"/>
+</div>
