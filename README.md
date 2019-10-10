@@ -6,7 +6,7 @@ fablinker是一个类似ansible工具，在一台服务器上可管理控制多�
 相对ansible，fablinker基于命令行交互式操作，使用起来更加方便快捷。
 
 使用前首先需要确保所有机器能用ssh连接。具体使用请查看应用场景章节。
-
+文档同步更新在github, https://github.com/gangly/fablinker
 <div align=center><img
 src="https://github.com/gangly/fablinker/blob/master/doc/img/fab.png" width="400" height="400" alt="架构图"/>
 </div>
