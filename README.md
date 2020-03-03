@@ -99,7 +99,7 @@ fab date 运行试试，会有惊喜！
 
 _____
 
-**请作者喝杯咖啡**
+**给作者点个star或请作者喝杯咖啡**
 
 <div align=left><img
 src="https://github.com/gangly/fablinker/blob/master/doc/img/微信pay.png" width="200" height="200" alt="喝杯咖啡"/>
