@@ -97,7 +97,7 @@ fab date 运行试试，会有惊喜！
 
 ![运行示例](doc/img/test.png)
 
-在每台机器运行Free命令
+在hdfs01-hdfs05的5台机器上同时运行Free命令:
 
 ![运行示例](doc/img/free.png)
 
