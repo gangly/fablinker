@@ -97,6 +97,10 @@ fab date 运行试试，会有惊喜！
 
 ![运行示例](doc/img/test.png)
 
+在每台机器运行Free命令
+
+![运行示例](doc/img/free.png)
+
 _____
 
 **给作者点个star或请作者喝杯咖啡**
