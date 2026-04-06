@@ -77,7 +77,10 @@ class FabShell(cmd.Cmd):
             cf.write(open(conf_file, 'w'))
             return True
         except Exception as e:
-            ColorPrint.red(e.message)
+            if hasattr(e, 'message'):
+                ColorPrint.red(e.message)
+            else:
+                ColorPrint.red(str(e))
 
     def set_fabp(self, *args):
         args_list = args[0]
@@ -104,12 +107,22 @@ class FabShell(cmd.Cmd):
 
     @fab_execute
     def fab_run(self, args):
+        """
+        在远程主机上执行命令
+        :param args: 要执行的命令
+        :return: 命令执行结果
+        """
         try:
             return fab.run(args)
         except Exception as e:
             raise e
 
     def fab_task_cd(self, args):
+        """
+        切换远程主机的工作目录
+        :param args: cd命令，如 "cd /home/work"
+        :return: 执行结果
+        """
         ret = self.fab_run(args)
         for host in ret:
             if not ret[host].succeeded:
@@ -129,8 +142,8 @@ class FabShell(cmd.Cmd):
             self.cwd_list += tmp_cwd.strip('/').split('/')
 
         fab.env.cwd = '/' + '/'.join(self.cwd_list)
-        print (fab.env.cwd)
-        print ()
+        print(fab.env.cwd)
+        print()
         return True
 
     def fab_task_checkhosts(self, args):
@@ -176,7 +189,7 @@ class FabShell(cmd.Cmd):
 
     def do_fab(self, args):
         """
-        -*-*-*-*-*-*-*-*-
+        -*-*-*-*-*-*-*-*-*
         desc : execute shell command on remote hosts
         usage: fab [-fabp/-fabs] [-fabh host1,host2,...] cmd [&]
                & : running task on deamon
@@ -195,16 +208,19 @@ class FabShell(cmd.Cmd):
             
             args = ' '.join(args_list)
             # check whether the task is running on deamon
-            if args[-1] == '&':
+            if args and args[-1] == '&':
                 args = 'nohup ' + args + ' disown;sleep 1'
             with fab.settings(**fab_kw):
                 # 需要定制开发的命令
-                if self.callback('fab_task_', args_list[0], args):
+                if args_list and self.callback('fab_task_', args_list[0], args):
                     return
-                self.fab_run(args)
+                if args:
+                    self.fab_run(args)
+                else:
+                    ColorPrint.blue(self.do_fab.__doc__)
 
         except Exception as e:
-            ColorPrint.red('cmd error, %s' % e)
+            ColorPrint.red('cmd error, %s' % str(e))
             ColorPrint.blue(self.do_fab.__doc__)
 
     def do_setparallel(self, args):
@@ -240,7 +256,7 @@ class FabShell(cmd.Cmd):
 
     def do_get(self, args):
         """
-        -*-*-*-*-*-*-*-*-
+        -*-*-*-*-*-*-*-*-*
         desc : get files from remote servers
         usage: get [-n] local_path remote_path
                -n : save remote file to file0, file1...
@@ -258,6 +274,11 @@ class FabShell(cmd.Cmd):
             if '-n' in args_list:
                 args_list.remove('-n')
            
+            if len(args_list) < 2:
+                ColorPrint.red('not enough parameters')
+                ColorPrint.blue(self.do_get.__doc__)
+                return
+            
             local_path = args_list[0]
             remote_path = args_list[1]
             if len(fab.env.hosts) > 1:
@@ -268,27 +289,32 @@ class FabShell(cmd.Cmd):
                         self.fab_get(remote_path, tmp_local_path)
             else:
                 self.fab_get(remote_path, local_path)
-        except IndexError:
-            ColorPrint.red('not enough parameters')
         except Exception as e:
-            ColorPrint.red('bad command, %s' % e)
+            ColorPrint.red('bad command, %s' % str(e))
             ColorPrint.blue(self.do_get.__doc__)
 
     def do_shell(self, args):
         """
-        -*-*-*-*-*-*-*-*-
+        -*-*-*-*-*-*-*-*-*
         desc : run a shell commad on local server
         usage: !shellcmd
         eg   : !ls
         """
-        sub_cmd = subprocess.Popen(args, shell=True, stdout=subprocess.PIPE)
-        print(sub_cmd.communicate()[0])
+        try:
+            result = subprocess.run(args, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+            if result.stdout:
+                print(result.stdout)
+            if result.stderr:
+                ColorPrint.red(result.stderr)
+        except Exception as e:
+            ColorPrint.red('shell command error: %s' % str(e))
 
     def callback(self, prefix, name, *args):
-        method = getattr(self, prefix+name, None)
+        method_name = prefix + name
+        method = getattr(self, method_name, None)
         if callable(method):
             return method(*args)
-            # method(*args)
+        return None
 
     def ls_g(self):
         for group in self.host_groups.keys():

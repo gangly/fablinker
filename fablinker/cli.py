@@ -33,4 +33,7 @@ def main():
         ColorPrint.red(exstr)
 
     except Exception as e:
-        ColorPrint.red(e.message)
+        if hasattr(e, 'message'):
+            ColorPrint.red(e.message)
+        else:
+            ColorPrint.red(str(e))

@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 import argparse
+import os
 
 from fabric.colors import *
 from fablinker.compat import config_parser, compat_input
@@ -25,7 +26,7 @@ class ColorPrint(object):
 def get_cmd_args():
     parser = argparse.ArgumentParser(description='Fablinker is a tool for operating servers!')
 
-    parser.add_argument('-f', action='store', dest='conf_file', help='server hosts file')
+    parser.add_argument('-f', '--config', action='store', dest='conf_file', help='server hosts file')
     parser.add_argument("-v", "--version", help="show the version of fablinker", action="store_true")
     cmd_args = parser.parse_args()
 
@@ -34,7 +35,7 @@ def get_cmd_args():
         exit(0)
     conf_file = cmd_args.conf_file if cmd_args.conf_file else CONFIG_FILE
     if not os.path.isfile(conf_file):
-        raise FileNotFoundError("config file not found!")
+        raise FileNotFoundError("config file not found: {}".format(conf_file))
     return conf_file
 
 

@@ -38,7 +38,19 @@ except ImportError:
 is_windows = sys.platform == 'win32'
 
 if is_windows:
-    from hcmd.multithreading import *
+    # Windows平台使用线程代替进程
+    import threading
+    Process = threading.Thread
+    Lock = threading.Lock
+    
+    class Manager:
+        def list(self):
+            return []
+        def dict(self):
+            return {}
+    
+    List = Manager().list
+    Dict = Manager().dict
 else:
     import multiprocessing
     from multiprocessing import Process, Lock, Value
